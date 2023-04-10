@@ -1,0 +1,77 @@
+{
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/index/index",
+			"style": {
+				"navigationBarTitleText": "首页",
+				"navigationStyle": "custom",
+				"app-plus": { //app端扩展配置
+					"scrollIndicator": "none",
+					"titleNView": "none"
+				}
+			}
+		},
+		{
+			"path": "pages/interview-question/interview-question",
+			"style": {
+				"navigationBarTitleText": "刷面试题",
+				"navigationStyle": "custom",
+				"backgroundColor": "#f0f3f7",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/interview-process/interview-process",
+			"style": {
+				"navigationBarTitleText": "面试流程",
+				"navigationStyle": "custom",
+				"backgroundColor": "#f0f3f7",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/my-contract/my-contract",
+			"style": {
+				"navigationBarTitleText": "我的协议",
+				"navigationStyle": "custom",
+				"backgroundColor": "#f0f3f7",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/my-card/my-card",
+			"style": {
+				"navigationBarTitleText": "我的名片",
+				"navigationStyle": "custom",
+				"backgroundColor": "#f0f3f7",
+				"enablePullDownRefresh": false
+			}
+		}
+	],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "uni-app",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8"
+	},
+	"uniIdRouter": {},
+	"tabBar": {
+		"custom": true,
+		"list": [{
+			"pagePath": "pages/index/index",
+			"text": "首页"
+		}, {
+			"pagePath": "pages/interview-question/interview-question",
+			"text": "刷面试题"
+		}, {
+			"pagePath": "pages/interview-process/interview-process",
+			"text": "面试流程"
+		}, {
+			"pagePath": "pages/my-contract/my-contract",
+			"text": "我的协议"
+		}, {
+			"pagePath": "pages/my-card/my-card",
+			"text": "我的名片"
+		}]
+	}
+}
