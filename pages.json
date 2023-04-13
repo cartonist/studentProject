@@ -46,6 +46,15 @@
 				"backgroundColor": "#f0f3f7",
 				"enablePullDownRefresh": false
 			}
+		},
+		{
+			"path": "pages/show-contract/show-contract",
+			"style": {
+				"navigationBarTitleText": "班级权益",
+				"navigationStyle": "custom",
+				"backgroundColor": "#f0f3f7",
+				"enablePullDownRefresh": false
+			}
 		}
 	],
 	"globalStyle": {
@@ -56,7 +65,7 @@
 	},
 	"uniIdRouter": {},
 	"tabBar": {
-		"custom": true,
+		// "custom": true,
 		"list": [{
 			"pagePath": "pages/index/index",
 			"text": "首页"

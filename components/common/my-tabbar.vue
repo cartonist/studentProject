@@ -56,16 +56,17 @@
 <style lang="less" scoped>
 	.my-tabbar {
 		width: 100%;
+		position: fixed;
 		left: 0;
 		bottom: 0;
 		position: fixed;
 		box-sizing: border-box;
 
 		.tabbar-list {
-			width: 100%;
-			position: fixed;
-			left: 0;
-			bottom: 0;
+			// width: 100%;
+			// position: fixed;
+			// left: 0;
+			// bottom: 0;
 			color: #344356;
 			background-color: #fff;
 			box-shadow: 0px -12px 37px 0px rgba(230, 235, 243, 0.9);
