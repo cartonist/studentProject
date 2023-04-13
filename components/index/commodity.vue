@@ -24,7 +24,7 @@
 		classPath: 'https://illlustrations.co/static/b5f0bcbc2c3208355eec39b3f27e8510/ee604/103-gym-time.png',
 		className: '实训班'
 	}, {
-		classPath: 'https://illlustrations.co/static/d847add7d6be3573939abc8f94dfa96d/ee604/day46-experiment-lab.png',
+		classPath: 'https://illlustrations.co/static/5e359995654eacf3b1e2541edd48fb86/ee604/112-installing.png',
 		className: '全日制'
 	}, {
 		classPath: 'https://illlustrations.co/static/c91b38b0696ee92de685b539144ecdad/ee604/day72-designer-tool-war.png',
