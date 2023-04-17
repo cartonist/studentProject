@@ -55,6 +55,24 @@
 				"backgroundColor": "#f0f3f7",
 				"enablePullDownRefresh": false
 			}
+		},
+		{
+			"path": "pages/class-detail/class-detail",
+			"style": {
+				"navigationBarTitleText": "班级详情",
+				"navigationStyle": "custom",
+				"backgroundColor": "#f0f3f7",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/enter-school/enter-school",
+			"style": {
+				"navigationBarTitleText": "快速入学",
+				"navigationStyle": "custom",
+				"backgroundColor": "#f0f3f7",
+				"enablePullDownRefresh": false
+			}
 		}
 	],
 	"globalStyle": {

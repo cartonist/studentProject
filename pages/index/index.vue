@@ -109,7 +109,7 @@
 			align-items: center;
 			background-color: #5468ff;
 			border-radius: 10rpx;
-			padding: 0 20rpx;
+			padding-left: 30rpx;
 			box-sizing: border-box;
 
 			.show-text {

@@ -15,7 +15,7 @@
 	}
 </script>
 
-<style>
+<style lang="less">
 	/*每个页面公共css */
 	/* 隐藏滚动条 */
 	page {
