@@ -51,7 +51,7 @@
 		getCurrentInstance,
 		ref
 	} from "vue";
-	import ClassHeader from '@/components/class-detail/class-header.vue'
+	import ClassHeader from '@/components/common/class-header.vue'
 	import MangaList from '@/components/class-detail/MangaList.vue'
 	import CelebrityList from '@/components/class-detail/CelebrityList.vue'
 	import Notice from '@/components/class-detail/Notice.vue'

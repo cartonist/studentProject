@@ -50,6 +50,7 @@
 		flex-direction: column;
 		align-items: center;
 		background-color: #fff;
+		z-index: 999;
 
 		.status-bar {
 			width: 100vw;
