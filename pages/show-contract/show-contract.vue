@@ -5,57 +5,33 @@
 		</view>
 		<scroll-view scroll-y="true" class="contract" :style="'height:'+scrollHeight+'px'">
 			<!-- 表示每一个班型 -->
-			<view class="sign-item">
+			<view class="sign-item" v-for="item in classInfo" :key="item.id">
 				<view class="item-title">
-					<text>实训营</text>
+					<text>{{item.class_name}}</text>
 				</view>
 				<view class="item-context">
-					<view class="context-text">
-						<rich-text>学习周期一个月</rich-text>
-						<rich-text>学习周期一个月</rich-text>
-						<rich-text>学习周期一个月</rich-text>
-						<rich-text>学习周期一个月</rich-text>
+					<view class="context-title-text ">
+						<text style="text-decoration: underline;">适合人群</text>
+					</view>
+					<view>
+						<view class="item-li">{{item.class_member}}</view>
+					</view>
 
+					<view class="context-title-text ">
+						<text style="text-decoration: underline;">学习周期</text>：{{item.study_cycle}}
+					</view>
+					<view class="context-title-text ">
+						<text style="text-decoration: underline;">就业公司</text>：{{item.company}}
+					</view>
+					<view class="context-title-text ">
+						<text style="text-decoration: underline;">就职岗位</text>：{{item.post}}
+					</view>
+					<view class="context-title-text ">
+						<text style="text-decoration: underline;">就业薪资</text>：{{item.salary}}￥
 					</view>
 				</view>
 				<view class="sign-footer">
-					<rich-text>结尾</rich-text>
-				</view>
-			</view>
-			<view class="sign-item">
-				<view class="item-title">
-					<text>实训营</text>
-				</view>
-				<view class="item-context">
-					<view class="context-text">
-						<rich-text>学习周期一个月</rich-text>
-						<rich-text>学习周期一个月</rich-text>
-						<rich-text>学习周期一个月</rich-text>
-						<rich-text>学习周期一个月</rich-text>
-						<rich-text>学习周期一个月</rich-text>
-						<rich-text>学习周期一个月</rich-text>
-						<rich-text>学习周期一个月</rich-text>
-						<rich-text>学习周期一个月</rich-text>
-					</view>
-				</view>
-				<view class="sign-footer">
-					<rich-text>结尾</rich-text>
-				</view>
-			</view>
-			<view class="sign-item">
-				<view class="item-title">
-					<text>实训营</text>
-				</view>
-				<view class="item-context">
-					<view class="context-text">
-						<rich-text>学习周期一个月</rich-text>
-						<rich-text>学习周期一个月</rich-text>
-						<rich-text>学习周期一个月</rich-text>
-						<rich-text>学习周期一个月</rich-text>
-					</view>
-				</view>
-				<view class="sign-footer">
-					<rich-text>结尾</rich-text>
+
 				</view>
 			</view>
 		</scroll-view>
@@ -76,7 +52,11 @@
 		getCurrentInstance,
 		ref
 	} from "vue";
+	import {
+		getClassList
+	} from '../../api/class';
 	let scrollHeight = ref(0)
+	let classInfo = ref({})
 	const {
 		proxy,
 	} = getCurrentInstance();
@@ -85,6 +65,13 @@
 			delta: 1
 		})
 	}
+	const __int = async () => {
+		const res = await getClassList()
+		classInfo.value = res
+	}
+	onLoad(() => {
+		__int()
+	})
 	onReady(() => {
 		// 获取屏幕的高度
 		uni.getSystemInfo({
@@ -177,10 +164,38 @@
 					font-weight: 400;
 					color: #7a8bff;
 				}
+
+				.item-li {
+					padding: 10rpx 120rpx;
+					color: #5d6fe5;
+					position: relative;
+
+					&::before {
+						content: '';
+						display: block;
+						height: 20rpx;
+						width: 20rpx;
+						position: absolute;
+						top: 20rpx;
+						left: 84rpx;
+						border-radius: 10rpx;
+						background-color: #7a8bff;
+					}
+				}
+
+				.context-title-text {
+					padding: 10rpx 40rpx;
+					font-size: 36rpx;
+					font-family: Microsoft YaHei;
+					font-weight: 400;
+					color: blue;
+					// text-decoration: underline;
+				}
 			}
 
 			.sign-footer {
 				width: 100%;
+				height: 60rpx;
 				background: url('https://fawn.xuexiluxian.cn/api/profile/wechat/bgimg/sign-bg-footer.png') no-repeat;
 				background-size: 100% 100%;
 				margin-bottom: 20rpx;

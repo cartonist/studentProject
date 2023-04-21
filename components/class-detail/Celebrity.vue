@@ -1,10 +1,10 @@
 <template>
 	<view class="celebrity-container">
-		<view class="celebrity-item">
+		<view class="celebrity-item" v-for="item in celebList" :key="item.id">
 			<!-- 姓名和奖杯 -->
 			<view class="item-header">
 				<view class="header-left">
-					<view class="name">张三</view>
+					<view class="name">{{item.name}}</view>
 					<view class="student-stars">
 						<image src="@/static/img/star-fill.png" mode=""></image>
 					</view>
@@ -15,108 +15,28 @@
 			</view>
 			<view class="item-content">
 				<view class="item">
-					就业城市：<text class="item-text">北京</text>
+					就业城市：<text class="item-text">{{item.work_city}}</text>
 				</view>
 				<view class="item">
-					就业城市：<text class="item-text active-text">20k</text>
+					就业薪资：<text class="item-text active-text">{{item.salary}}</text>
 				</view>
 				<view class="item">
-					就业城市：<text class="item-text">2105A</text>
+					来自班级：<text class="item-text">{{item.class_name}}</text>
 				</view>
 			</view>
 			<!-- 学历背景 -->
 			<view class="footer">
 				<view class="foot-item">
 					<image src="@/static/img/education.png" mode=""></image>
-					<view class="text">本科</view>
+					<view class="text">{{item.education}}</view>
 				</view>
 				<view class="foot-item">
 					<image src="@/static/img/info.png" mode=""></image>
-					<view class="text">社招</view>
+					<view class="text">{{item.work_way}}</view>
 				</view>
 				<view class="foot-item">
 					<image src="@/static/img/leaf.png" mode=""></image>
-					<view class="text">20岁</view>
-				</view>
-			</view>
-		</view>
-		<view class="celebrity-item">
-			<!-- 姓名和奖杯 -->
-			<view class="item-header">
-				<view class="header-left">
-					<view class="name">张三</view>
-					<view class="student-stars">
-						<image src="@/static/img/star-fill.png" mode=""></image>
-					</view>
-				</view>
-				<view class="header-right">
-					<image src="@/static/img/przie.png" mode=""></image>
-				</view>
-			</view>
-			<view class="item-content">
-				<view class="item">
-					就业城市：<text class="item-text">北京</text>
-				</view>
-				<view class="item">
-					就业城市：<text class="item-text active-text">20k</text>
-				</view>
-				<view class="item">
-					就业城市：<text class="item-text">2105A</text>
-				</view>
-			</view>
-			<!-- 学历背景 -->
-			<view class="footer">
-				<view class="foot-item">
-					<image src="@/static/img/education.png" mode=""></image>
-					<view class="text">本科</view>
-				</view>
-				<view class="foot-item">
-					<image src="@/static/img/info.png" mode=""></image>
-					<view class="text">社招</view>
-				</view>
-				<view class="foot-item">
-					<image src="@/static/img/leaf.png" mode=""></image>
-					<view class="text">20岁</view>
-				</view>
-			</view>
-		</view>
-		<view class="celebrity-item">
-			<!-- 姓名和奖杯 -->
-			<view class="item-header">
-				<view class="header-left">
-					<view class="name">张三</view>
-					<view class="student-stars">
-						<image src="@/static/img/star-fill.png" mode=""></image>
-					</view>
-				</view>
-				<view class="header-right">
-					<image src="@/static/img/przie.png" mode=""></image>
-				</view>
-			</view>
-			<view class="item-content">
-				<view class="item">
-					就业城市：<text class="item-text">北京</text>
-				</view>
-				<view class="item">
-					就业城市：<text class="item-text active-text">20k</text>
-				</view>
-				<view class="item">
-					就业城市：<text class="item-text">2105A</text>
-				</view>
-			</view>
-			<!-- 学历背景 -->
-			<view class="footer">
-				<view class="foot-item">
-					<image src="@/static/img/education.png" mode=""></image>
-					<view class="text">本科</view>
-				</view>
-				<view class="foot-item">
-					<image src="@/static/img/info.png" mode=""></image>
-					<view class="text">社招</view>
-				</view>
-				<view class="foot-item">
-					<image src="@/static/img/leaf.png" mode=""></image>
-					<view class="text">20岁</view>
+					<view class="text">{{item.age}}</view>
 				</view>
 			</view>
 		</view>
@@ -124,6 +44,7 @@
 </template>
 
 <script setup>
+	defineProps(['celebList'])
 </script>
 
 <style lang="scss" scoped>

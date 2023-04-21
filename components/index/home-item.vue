@@ -1,9 +1,9 @@
 <template>
 	<view class="home-item-container" @tap="goDetail(item)">
-		<view class="item-bg" :style="'background: url('+item.classPath+') no-repeat; background-size: cover;'">
+		<view class="item-bg" :style="'background: url('+item.class_path+') no-repeat; background-size: cover;'">
 			<view class="item-content">
 				<img src="/static/img/left.png" alt="">
-				<text>{{item.className}}</text>
+				<text>{{item.class_name}}</text>
 				<img src="/static/img/right.png" alt="">
 			</view>
 		</view>

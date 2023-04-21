@@ -1,16 +1,21 @@
 <template>
-	<view class="notice-container">
-		<view class="notice-item notice-normal">
-			<image src="/static/img/notice.png" mode=""></image>
-			<view class="notice-text">
-				<text>我是第一条公告</text>
-			</view>
-		</view>
+	<view class="notice-container" style="overflow: hidden;">
+		<swiper style="height: 100rpx;" circular autoplay interval="3000" duration="500" vertical
+			easing-function="linear">
+			<swiper-item v-for="item in noticeList" :key="item.id">
+				<view class="notice-item notice-normal">
+					<image src="/static/img/notice.png" mode=""></image>
+					<view class="notice-text">
+						<text>{{item.notice_title}}</text>
+					</view>
+				</view>
+			</swiper-item>
+		</swiper>
 	</view>
 </template>
 
 <script setup>
-
+	defineProps(['noticeList'])
 </script>
 
 <style lang="scss">
@@ -28,7 +33,7 @@
 			display: flex;
 			align-items: center;
 			margin: 0 auto;
-			padding: 0 20rpx;
+			padding: 20rpx 20rpx;
 			box-sizing: border-box;
 
 			image {

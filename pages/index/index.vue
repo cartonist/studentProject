@@ -14,7 +14,7 @@
 				</view>
 			</view>
 			<scroll-view scroll-y="true" :style="'height:'+scrollHeight+'px'">
-				<Commodity></Commodity>
+				<Commodity :classData="classData"></Commodity>
 			</scroll-view>
 		</view>
 		<MyTabbar :currentIndex="currentIndex"></MyTabbar>
@@ -32,13 +32,25 @@
 		getCurrentInstance,
 		ref
 	} from "vue";
+	import {
+		getClassList
+	} from '../../api/class';
 	const {
 		proxy,
 	} = getCurrentInstance();
+
 	let currentIndex = 0
 	let scrollHeight = ref(0)
-
-	onLoad(() => {})
+	// 班级数据
+	let classData = ref([])
+	const __init = async () => {
+		const classInfo = await getClassList()
+		classData.value = classInfo
+		console.log(classData.value)
+	}
+	onLoad(() => {
+		__init()
+	})
 	onReady(() => {
 		// 获取屏幕的高度
 		uni.getSystemInfo({
@@ -48,7 +60,6 @@
 				info.boundingClientRect((data) => {
 					// data包含元素的高度信息
 					// data.height 头部的高度
-					console.log(res)
 					// console.log(data)
 					scrollHeight.value = res.screenHeight - data.height - res.windowWidth *
 						136 / 750

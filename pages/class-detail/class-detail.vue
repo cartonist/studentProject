@@ -1,7 +1,7 @@
 <template>
 	<view class="class-detail">
-		<ClassHeader :title="title"></ClassHeader>
-		<scroll-view scroll-y="true" class="scroll-vertical">
+		<ClassHeader :title="title" class="header"></ClassHeader>
+		<scroll-view scroll-y="true" class="scroll-vertical" :style="{height: scrollHeight+'px'}">
 			<view>
 				<!-- banner -->
 				<view class="banner-bg">
@@ -18,13 +18,13 @@
 					<view class="title">名人堂</view>
 					<scroll-view scroll-x="true">
 						<view class="scroll-item">
-							<CelebrityList></CelebrityList>
+							<CelebrityList :celebList="celebList"></CelebrityList>
 						</view>
 					</scroll-view>
 				</view>
 				<!-- 公告 -->
 				<view class="notice">
-					<Notice></Notice>
+					<Notice :noticeList="noticeList"></Notice>
 				</view>
 			</view>
 		</scroll-view>
@@ -55,16 +55,53 @@
 	import MangaList from '@/components/class-detail/MangaList.vue'
 	import CelebrityList from '@/components/class-detail/CelebrityList.vue'
 	import Notice from '@/components/class-detail/Notice.vue'
+	import {
+		getExcelList
+	} from '../../api/excel';
+	import {
+		getNoticeList
+	} from '../../api/notice';
+	const {
+		proxy,
+	} = getCurrentInstance();
+	const scrollHeight = ref("")
 	const title = ref("")
 	const isPop = ref(true)
 	const closePop = () => {
 		isPop.value = false
 	}
+	// 名人堂数据列表
+	const celebList = ref([])
+	// 通知数据列表
+	const noticeList = ref([])
 	onLoad((option) => {
 		// console.log(JSON.parse(option.item))
 		const item = JSON.parse(option.item)
-		title.value = item.className
+		title.value = item.class_name
+		__init()
+		// 获取屏幕的高度
+		uni.getSystemInfo({
+			success: (res) => {
+				// 获取头部的高度
+				let info = uni.createSelectorQuery().in(proxy).select('.header')
+				info.boundingClientRect((data) => {
+					// data包含元素的高度信息
+					// data.height 头部的高度
+					// console.log(data)
+					scrollHeight.value = res.windowHeight - data.height
+				}).exec(function(res) {
+					//这个方法必须执行，即使什么也不做，否则不会获取到信息
+				})
+
+			}
+		})
 	})
+	const __init = async () => {
+		const excelData = await getExcelList()
+		celebList.value = excelData
+		const noticeData = await getNoticeList()
+		noticeList.value = noticeData
+	}
 	const goEnterSchool = () => {
 		uni.navigateTo({
 			url: "/pages/enter-school/enter-school"
@@ -72,7 +109,7 @@
 	}
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 	.class-detail {
 		.scroll-vertical {
 			height: 1000rpx;
