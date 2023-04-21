@@ -9,26 +9,30 @@
 		<view class="manga-item">
 			<image src="/static/img/icon2.png" mode="" class="item-icon"></image>
 			<view class="item-text">
-				档案管理
+				我的协议
 			</view>
 		</view>
 		<view class="manga-item">
 			<image src="/static/img/icon3.png" mode="" class="item-icon"></image>
 			<view class="item-text">
-				档案管理
+				签署协议
 			</view>
 		</view>
-		<view class="manga-item">
+		<view class="manga-item" @click="goConsult">
 			<image src="/static/img/icon4.png" mode="" class="item-icon"></image>
 			<view class="item-text">
-				档案管理
+				咨询帮助
 			</view>
 		</view>
 	</view>
 </template>
 
 <script setup>
-
+	const goConsult = () => {
+		uni.navigateTo({
+			url: '/pages/consult/consult'
+		})
+	}
 </script>
 
 <style lang="scss" scoped>
