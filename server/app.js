@@ -9,6 +9,7 @@ var usersRouter = require('./routes/users');
 var classRouter = require('./routes/class');
 var excelRouter = require('./routes/excel');
 var noticeRouter = require('./routes/notice')
+var consultRouter = require('./routes/consult')
 
 var app = express();
 
@@ -32,6 +33,8 @@ app.use('/wechat/class', classRouter);
 app.use('/wechat/excellent', excelRouter);
 // 通知路由
 app.use('/wechat/notice', noticeRouter);
+// 咨询列表
+app.use('/wechat/help', consultRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
