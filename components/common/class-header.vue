@@ -5,7 +5,7 @@
 
 			</view>
 			<view class="topContent">
-				<view class="goBack">
+				<view class="goBack" v-if="isBack">
 					<slot name="left">
 						<image src="/static/img/arrow-left.png" mode="" @click="goBack"></image>
 					</slot>
@@ -26,6 +26,10 @@
 		title: {
 			type: String,
 			required: true
+		},
+		isBack: {
+			type: Boolean,
+			default: true
 		}
 	})
 	const goBack = () => {
@@ -62,6 +66,7 @@
 			height: 100rpx;
 			display: flex;
 			align-items: center;
+			position: relative;
 
 			.goBack {
 				width: 90rpx;
@@ -85,6 +90,11 @@
 				font-size: 32rpx;
 				text-align: center;
 				color: $scheme-font;
+				position: absolute;
+				top: 26rpx;
+				left: 50%;
+				transform: translateX(-50%);
+				// margin-left: 240rpx;
 
 			}
 		}

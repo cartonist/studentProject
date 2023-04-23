@@ -73,7 +73,8 @@
 				"backgroundColor": "#f0f3f7",
 				"enablePullDownRefresh": false
 			}
-		}, {
+		},
+		{
 			"path": "pages/consult/consult",
 			"style": {
 				"navigationBarTitleText": "咨询帮助",
@@ -81,8 +82,17 @@
 				"backgroundColor": "#f0f3f7",
 				"enablePullDownRefresh": false
 			}
-
+		},
+		{
+			"path": "pages/subject/subject",
+			"style": {
+				"navigationBarTitleText": "刷题",
+				"navigationStyle": "custom",
+				"backgroundColor": "#f0f3f7",
+				"enablePullDownRefresh": false
+			}
 		}
+
 
 	],
 	"globalStyle": {

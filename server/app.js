@@ -10,6 +10,7 @@ var classRouter = require('./routes/class');
 var excelRouter = require('./routes/excel');
 var noticeRouter = require('./routes/notice')
 var consultRouter = require('./routes/consult')
+var questionRouter = require('./routes/questions')
 
 var app = express();
 
@@ -23,7 +24,8 @@ app.use(express.urlencoded({
 	extended: false
 }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+// 托管静态资源目录
+app.use('/public', express.static('public'));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
@@ -33,8 +35,10 @@ app.use('/wechat/class', classRouter);
 app.use('/wechat/excellent', excelRouter);
 // 通知路由
 app.use('/wechat/notice', noticeRouter);
-// 咨询列表
+// 咨询路由
 app.use('/wechat/help', consultRouter)
+// 面试题路由
+app.use('/wechat/questions', questionRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
