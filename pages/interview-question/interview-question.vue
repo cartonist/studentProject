@@ -33,7 +33,7 @@
 		ref
 	} from "vue";
 	import {
-		getQuestionsList
+		getQuestionsTypeList
 	} from '../../api/questions';
 	const {
 		proxy,
@@ -64,7 +64,7 @@
 		})
 	})
 	const __init = async () => {
-		const res = await getQuestionsList()
+		const res = await getQuestionsTypeList()
 		console.log(res)
 		questionList.value = res
 	}

@@ -5,15 +5,15 @@
 			<view class="item-title">{{item.question_title}}</view>
 			<view class="item-tips">{{item.question_source}}</view>
 		</view>
-		<view class="item-start" @click="goSubject">开始刷题</view>
+		<view class="item-start" @click="goSubject(item.id)">开始刷题</view>
 	</view>
 </template>
 
 <script setup>
 	defineProps(['item'])
-	const goSubject = () => {
+	const goSubject = (id) => {
 		uni.navigateTo({
-			url: '/pages/subject/subject'
+			url: '/pages/subject/subject?id=' + id
 		})
 	}
 </script>

@@ -18,6 +18,7 @@
 <style lang="less">
 	/*每个页面公共css */
 	/* 隐藏滚动条 */
+
 	page {
 		height: 100%;
 	}
@@ -29,5 +30,9 @@
 		-webkit-appearance: none;
 		background: transparent;
 		color: transparent;
+	}
+
+	.text-red {
+		color: red;
 	}
 </style>
