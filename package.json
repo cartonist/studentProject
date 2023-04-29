@@ -3,7 +3,8 @@
     "@highlightjs/vue-plugin": "^2.1.0",
     "highlight.js": "^11.7.0",
     "marked": "^4.3.0",
-    "prismjs": "^1.29.0"
+    "prismjs": "^1.29.0",
+    "vuex": "^4.1.0"
   },
   "devDependencies": {
     "babel-plugin-prismjs": "^2.1.0"

@@ -31,13 +31,19 @@ var cfg = {
 	// 块级标签，将被转为 div
 	blockTags: makeMap('address,article,aside,body,caption,center,cite,footer,header,html,nav,pre,section'),
 	// 将被移除的标签
-	ignoreTags: makeMap('area,base,canvas,frame,iframe,input,link,map,meta,param,script,source,style,svg,textarea,title,track,wbr'),
+	ignoreTags: makeMap(
+		'area,base,canvas,frame,iframe,input,link,map,meta,param,script,source,style,svg,textarea,title,track,wbr'
+		),
 	// 只能被 rich-text 显示的标签
 	richOnlyTags: makeMap('a,colgroup,fieldset,legend,table'),
 	// 自闭合的标签
-	selfClosingTags: makeMap('area,base,br,col,circle,ellipse,embed,frame,hr,img,input,line,link,meta,param,path,polygon,rect,source,track,use,wbr'),
+	selfClosingTags: makeMap(
+		'area,base,br,col,circle,ellipse,embed,frame,hr,img,input,line,link,meta,param,path,polygon,rect,source,track,use,wbr'
+		),
 	// 信任的标签
-	trustTags: makeMap('a,abbr,ad,audio,b,blockquote,br,code,col,colgroup,dd,del,dl,dt,div,em,fieldset,h1,h2,h3,h4,h5,h6,hr,i,img,ins,label,legend,li,ol,p,q,source,span,strong,sub,sup,table,tbody,td,tfoot,th,thead,tr,title,ul,video'),
+	trustTags: makeMap(
+		'a,abbr,ad,audio,b,blockquote,br,code,col,colgroup,dd,del,dl,dt,div,em,fieldset,h1,h2,h3,h4,h5,h6,hr,i,img,ins,label,legend,li,ol,p,q,source,span,strong,sub,sup,table,tbody,td,tfoot,th,thead,tr,title,ul,video'
+		),
 	// 默认的标签样式
 	userAgentStyles: {
 		address: 'font-style:italic',
@@ -77,4 +83,4 @@ cfg.ignoreTags.iframe = void 0;
 Object.assign(cfg.trustTags, makeMap('embed,iframe'));
 // #endif
 
-module.exports = cfg;
+export default cfg;

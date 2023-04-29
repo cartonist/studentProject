@@ -2,11 +2,13 @@
 	<view :class="'interlayer '+(c||'')" :style="s">
 		<block v-for="(n, i) in nodes" v-bind:key="i">
 			<!--图片-->
-			<view v-if="n.name=='img'" :class="'_img '+n.attrs.class" :style="n.attrs.style" :data-attrs="n.attrs" @tap="imgtap">
-				<rich-text v-if="ctrl[i]!=0" :nodes="[{attrs:{src:loading&&(ctrl[i]||0)<2?loading:(lazyLoad&&!ctrl[i]?placeholder:(ctrl[i]==3?errorImg:n.attrs.src||'')),alt:n.attrs.alt||'',width:n.attrs.width||'',style:'-webkit-touch-callout:none;max-width:100%;display:block'+(n.attrs.height?';height:'+n.attrs.height:'')},name:'img'}]" />
+			<view v-if="n.name=='img'" :class="'_img '+n.attrs.class" :style="n.attrs.style" :data-attrs="n.attrs"
+				@tap="imgtap">
+				<rich-text v-if="ctrl[i]!=0"
+					:nodes="[{attrs:{src:loading&&(ctrl[i]||0)<2?loading:(lazyLoad&&!ctrl[i]?placeholder:(ctrl[i]==3?errorImg:n.attrs.src||'')),alt:n.attrs.alt||'',width:n.attrs.width||'',style:'-webkit-touch-callout:none;max-width:100%;display:block'+(n.attrs.height?';height:'+n.attrs.height:'')},name:'img'}]" />
 				<image class="_image" :src="lazyLoad&&!ctrl[i]?placeholder:n.attrs.src" :lazy-load="lazyLoad"
-				 :show-menu-by-longpress="!n.attrs.ignore" :data-i="i" :data-index="n.attrs.i" data-source="img" @load="loadImg"
-				 @error="error" />
+					:show-menu-by-longpress="!n.attrs.ignore" :data-i="i" :data-index="n.attrs.i" data-source="img"
+					@load="loadImg" @error="error" />
 			</view>
 			<!--文本-->
 			<text v-else-if="n.type=='text'" decode>{{n.text}}</text>
@@ -14,25 +16,29 @@
 			<text v-else-if="n.name=='br'">\n</text>
 			<!--#endif-->
 			<!--视频-->
-			<view v-else-if="((n.lazyLoad&&!n.attrs.autoplay)||(n.name=='video'&&!loadVideo))&&ctrl[i]==undefined" :id="n.attrs.id" :class="'_video '+(n.attrs.class||'')"
-			 :style="n.attrs.style" :data-i="i" @tap="_loadVideo" />
-			<video v-else-if="n.name=='video'" :id="n.attrs.id" :class="n.attrs.class" :style="n.attrs.style" :autoplay="n.attrs.autoplay||ctrl[i]==0"
-			 :controls="n.attrs.controls" :loop="n.attrs.loop" :muted="n.attrs.muted" :poster="n.attrs.poster" :src="n.attrs.source[ctrl[i]||0]"
-			 :unit-id="n.attrs['unit-id']" :data-id="n.attrs.id" :data-i="i" data-source="video" @error="error" @play="play" />
+			<view v-else-if="((n.lazyLoad&&!n.attrs.autoplay)||(n.name=='video'&&!loadVideo))&&ctrl[i]==undefined"
+				:id="n.attrs.id" :class="'_video '+(n.attrs.class||'')" :style="n.attrs.style" :data-i="i"
+				@tap="_loadVideo" />
+			<video v-else-if="n.name=='video'" :id="n.attrs.id" :class="n.attrs.class" :style="n.attrs.style"
+				:autoplay="n.attrs.autoplay||ctrl[i]==0" :controls="n.attrs.controls" :loop="n.attrs.loop"
+				:muted="n.attrs.muted" :poster="n.attrs.poster" :src="n.attrs.source[ctrl[i]||0]"
+				:unit-id="n.attrs['unit-id']" :data-id="n.attrs.id" :data-i="i" data-source="video" @error="error"
+				@play="play" />
 			<!--音频-->
-			<audio v-else-if="n.name=='audio'" :ref="n.attrs.id" :class="n.attrs.class" :style="n.attrs.style" :author="n.attrs.author"
-			 :autoplay="n.attrs.autoplay" :controls="n.attrs.controls" :loop="n.attrs.loop" :name="n.attrs.name" :poster="n.attrs.poster"
-			 :src="n.attrs.source[ctrl[i]||0]" :data-i="i" :data-id="n.attrs.id" data-source="audio"
-			 @error.native="error" @play.native="play" />
+			<audio v-else-if="n.name=='audio'" :ref="n.attrs.id" :class="n.attrs.class" :style="n.attrs.style"
+				:author="n.attrs.author" :autoplay="n.attrs.autoplay" :controls="n.attrs.controls" :loop="n.attrs.loop"
+				:name="n.attrs.name" :poster="n.attrs.poster" :src="n.attrs.source[ctrl[i]||0]" :data-i="i"
+				:data-id="n.attrs.id" data-source="audio" @error.native="error" @play.native="play" />
 			<!--链接-->
-			<view v-else-if="n.name=='a'" :id="n.attrs.id" :class="'_a '+(n.attrs.class||'')" hover-class="_hover" :style="n.attrs.style"
-			 :data-attrs="n.attrs" @tap="linkpress">
+			<view v-else-if="n.name=='a'" :id="n.attrs.id" :class="'_a '+(n.attrs.class||'')" hover-class="_hover"
+				:style="n.attrs.style" :data-attrs="n.attrs" @tap="linkpress">
 				<trees class="_span" c="_span" :nodes="n.children" />
 			</view>
 			<!--广告-->
 			<!--<ad v-else-if="n.name=='ad'" :class="n.attrs.class" :style="n.attrs.style" :unit-id="n.attrs['unit-id']" :appid="n.attrs.appid" :apid="n.attrs.apid" :type="n.attrs.type" :adpid="n.attrs.adpid" data-source="ad" @error="error" />-->
 			<!--列表-->
-			<view v-else-if="n.name=='li'" :id="n.attrs.id" :class="n.attrs.class" :style="(n.attrs.style||'')+';display:flex;flex-direction:row'">
+			<view v-else-if="n.name=='li'" :id="n.attrs.id" :class="n.attrs.class"
+				:style="(n.attrs.style||'')+';display:flex;flex-direction:row'">
 				<view v-if="n.type=='ol'" class="_ol-bef">{{n.num}}</view>
 				<view v-else class="_ul-bef">
 					<view v-if="n.floor%3==0" class="_ul-p1">█</view>
@@ -42,19 +48,26 @@
 				<trees class="_li" c="_li" :nodes="n.children" :lazyLoad="lazyLoad" :loading="loading" />
 			</view>
 			<!--表格-->
-			<view v-else-if="n.name=='table'&&n.c" :id="n.attrs.id" :class="n.attrs.class" :style="(n.attrs.style||'')+';display:table'">
-				<view v-for="(tbody, o) in n.children" v-bind:key="o" :class="tbody.attrs.class" :style="(tbody.attrs.style||'')+(tbody.name[0]=='t'?';display:table-'+(tbody.name=='tr'?'row':'row-group'):'')">
-					<view v-for="(tr, p) in tbody.children" v-bind:key="p" :class="tr.attrs.class" :style="(tr.attrs.style||'')+(tr.name[0]=='t'?';display:table-'+(tr.name=='tr'?'row':'cell'):'')">
+			<view v-else-if="n.name=='table'&&n.c" :id="n.attrs.id" :class="n.attrs.class"
+				:style="(n.attrs.style||'')+';display:table'">
+				<view v-for="(tbody, o) in n.children" v-bind:key="o" :class="tbody.attrs.class"
+					:style="(tbody.attrs.style||'')+(tbody.name[0]=='t'?';display:table-'+(tbody.name=='tr'?'row':'row-group'):'')">
+					<view v-for="(tr, p) in tbody.children" v-bind:key="p" :class="tr.attrs.class"
+						:style="(tr.attrs.style||'')+(tr.name[0]=='t'?';display:table-'+(tr.name=='tr'?'row':'cell'):'')">
 						<trees v-if="tr.name=='td'" :nodes="tr.children" />
-						<trees v-else v-for="(td, q) in tr.children" v-bind:key="q" :class="td.attrs.class" :c="td.attrs.class" :style="(td.attrs.style||'')+(td.name[0]=='t'?';display:table-'+(td.name=='tr'?'row':'cell'):'')"
-						 :s="(td.attrs.style||'')+(td.name[0]=='t'?';display:table-'+(td.name=='tr'?'row':'cell'):'')" :nodes="td.children" />
+						<trees v-else v-for="(td, q) in tr.children" v-bind:key="q" :class="td.attrs.class"
+							:c="td.attrs.class"
+							:style="(td.attrs.style||'')+(td.name[0]=='t'?';display:table-'+(td.name=='tr'?'row':'cell'):'')"
+							:s="(td.attrs.style||'')+(td.name[0]=='t'?';display:table-'+(td.name=='tr'?'row':'cell'):'')"
+							:nodes="td.children" />
 					</view>
 				</view>
 			</view>
 			<!--#ifdef APP-PLUS-->
-			<iframe v-else-if="n.name=='iframe'" :style="n.attrs.style" :allowfullscreen="n.attrs.allowfullscreen" :frameborder="n.attrs.frameborder"
-			 :width="n.attrs.width" :height="n.attrs.height" :src="n.attrs.src" />
-			<embed v-else-if="n.name=='embed'" :style="n.attrs.style" :width="n.attrs.width" :height="n.attrs.height" :src="n.attrs.src" />
+			<iframe v-else-if="n.name=='iframe'" :style="n.attrs.style" :allowfullscreen="n.attrs.allowfullscreen"
+				:frameborder="n.attrs.frameborder" :width="n.attrs.width" :height="n.attrs.height" :src="n.attrs.src" />
+			<embed v-else-if="n.name=='embed'" :style="n.attrs.style" :width="n.attrs.width" :height="n.attrs.height"
+				:src="n.attrs.src" />
 			<!--#endif-->
 			<!--富文本-->
 			<!--#ifdef MP-WEIXIN || MP-QQ || APP-PLUS-->
@@ -63,8 +76,9 @@
 			<!--#ifndef MP-WEIXIN || MP-QQ || APP-PLUS-->
 			<rich-text v-else-if="!n.c" :id="n.attrs.id" :nodes="[n]" style="display:inline" />
 			<!--#endif-->
-			<trees v-else :class="(n.attrs.id||'')+' _'+n.name+' '+(n.attrs.class||'')" :c="(n.attrs.id||'')+' _'+n.name+' '+(n.attrs.class||'')"
-			 :style="n.attrs.style" :s="n.attrs.style" :nodes="n.children" :lazyLoad="lazyLoad" :loading="loading" />
+			<trees v-else :class="(n.attrs.id||'')+' _'+n.name+' '+(n.attrs.class||'')"
+				:c="(n.attrs.id||'')+' _'+n.name+' '+(n.attrs.class||'')" :style="n.attrs.style" :s="n.attrs.style"
+				:nodes="n.children" :lazyLoad="lazyLoad" :loading="loading" />
 		</block>
 	</view>
 </template>
@@ -72,7 +86,8 @@
 <script>
 	global.Parser = {};
 	import trees from './trees'
-	const errorImg = require('../libs/config.js').errorImg;
+	import cfg from './config.js'
+	const errorImg = cfg.errorImg;
 	export default {
 		components: {
 			trees
@@ -282,7 +297,7 @@
 
 <style>
 	/* 在这里引入自定义样式 */
-    
+
 	/* 链接和图片效果 */
 	._a {
 		display: inline;
@@ -336,9 +351,9 @@
 	._ul,
 	._li {
 		display: block;
-        font-size:26rpx;
-    }
-	
+		font-size: 26rpx;
+	}
+
 	/* #endif */
 
 	._code {

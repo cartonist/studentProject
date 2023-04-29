@@ -1,4 +1,4 @@
-var hljs = require('./core');
+import hljs from './core';
 
 // hljs.registerLanguage('1c', require('./languages/1c'));
 // hljs.registerLanguage('abnf', require('./languages/abnf'));
@@ -191,4 +191,4 @@ var hljs = require('./core');
 // hljs.registerLanguage('xquery', require('./languages/xquery'));
 // hljs.registerLanguage('zephir', require('./languages/zephir'));
 
-module.exports = hljs;
+export default hljs;

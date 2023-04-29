@@ -18,7 +18,7 @@ app.$mount()
 import {
 	createSSRApp
 } from 'vue'
-
+import store from '@/store/index.js'
 import hljs from 'highlight.js'
 import 'highlight.js/styles/a11y-dark.css' // 这里可以切换不同的主题
 import hljsVuePlugin from '@highlightjs/vue-plugin'
@@ -34,6 +34,7 @@ export function createApp() {
 			})
 		}, 200)
 	})
+	app.use(store)
 	app.use(hljsVuePlugin)
 	// console.log(app)
 	return {

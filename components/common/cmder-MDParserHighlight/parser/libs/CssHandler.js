@@ -1,5 +1,5 @@
-const cfg = require('./config.js'),
-	isLetter = c => (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z');
+import cfg from './config.js',
+isLetter = c => (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z');
 
 function CssHandler(tagStyle) {
 	var styles = Object.assign(Object.create(null), cfg.userAgentStyles);

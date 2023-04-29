@@ -5,8 +5,8 @@
  * @author JinYufeng
  * @listens MIT
  */
-const cfg = require('./config.js'),
-	blankChar = cfg.blankChar,
+import cfg from './config.js',
+blankChar = cfg.blankChar,
 	CssHandler = require('./CssHandler.js'),
 	windowWidth = uni.getSystemInfoSync().windowWidth;
 var emoji;
@@ -77,7 +77,8 @@ MpHtmlParser.prototype.setAttr = function() {
 		val = this.attrVal;
 	if (cfg.boolAttrs[name]) this.attrs[name] = 'T';
 	else if (val) {
-		if (name == 'src' || (name == 'data-src' && !this.attrs.src)) this.attrs.src = this.getUrl(this.decode(val, 'amp'));
+		if (name == 'src' || (name == 'data-src' && !this.attrs.src)) this.attrs.src = this.getUrl(this.decode(val,
+			'amp'));
 		else if (name == 'href' || name == 'style') this.attrs[name] = this.decode(val, 'amp');
 		else if (name.substr(0, 5) != 'data-') this.attrs[name] = val;
 	}
@@ -169,7 +170,8 @@ MpHtmlParser.prototype.setNode = function() {
 					type = node.attrs.type || '';
 				if (type.includes('video') || src.includes('.mp4') || src.includes('.3gp') || src.includes('.m3u8'))
 					node.name = 'video';
-				else if (type.includes('audio') || src.includes('.m4a') || src.includes('.wav') || src.includes('.mp3') || src.includes(
+				else if (type.includes('audio') || src.includes('.m4a') || src.includes('.wav') || src.includes(
+						'.mp3') || src.includes(
 						'.aac'))
 					node.name = 'audio';
 				else break;
@@ -336,7 +338,8 @@ MpHtmlParser.prototype.remove = function(node) {
 		if (this.section().toLowerCase() == name) {
 			// 代码块高亮
 			if (name == 'pre') {
-				this.data = this.data.substr(0, j + 1) + cfg.highlight(this.data.substring(j + 1, this.i - 5), node.attrs) + this.data
+				this.data = this.data.substr(0, j + 1) + cfg.highlight(this.data.substring(j + 1, this.i - 5), node
+						.attrs) + this.data
 					.substr(this.i - 5);
 				return this.i = j;
 			} else if (name == 'style')
@@ -420,7 +423,8 @@ MpHtmlParser.prototype.popNode = function(node) {
 					var style = n.attrs.style || '';
 					if (node.c && n.name[0] == 't') {
 						n.c = 1;
-						style += ';display:table-' + (n.name == 'th' || n.name == 'td' ? 'cell' : (n.name == 'tr' ? 'row' : 'row-group'));
+						style += ';display:table-' + (n.name == 'th' || n.name == 'td' ? 'cell' : (n.name ==
+							'tr' ? 'row' : 'row-group'));
 					}
 					if (n.name == 'th' || n.name == 'td') {
 						if (border) style = `border:${border}px solid gray;${style}`;
@@ -532,4 +536,4 @@ MpHtmlParser.prototype.EndTag = function(c) {
 		else this.state = this.Text;
 	}
 }
-module.exports = MpHtmlParser;
+export default MpHtmlParser;

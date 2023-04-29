@@ -22,9 +22,9 @@
 	import trees from './libs/trees';
 	var cache = {},
 		// #ifdef MP-WEIXIN || MP-TOUTIAO
-		fs = uni.getFileSystemManager ? uni.getFileSystemManager() : null,
-		// #endif
-		Parser = require('./libs/MpHtmlParser.js');
+		fs = uni.getFileSystemManager ? uni.getFileSystemManager() : null;
+	// #endif
+	// Parser = require('./libs/MpHtmlParser.js');
 	var dom;
 	// 计算 cache 的 key
 	function hash(str) {
@@ -215,7 +215,8 @@
 				else {
 					html =
 						'<meta charset="utf-8" /><meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"><style>html,body{width:100%;height:100%;overflow:hidden}body{margin:0}</style><base href="' +
-						this.domain + '"><div id="parser"' + (this.selectable ? '>' : ' style="user-select:none">') + this._handleHtml(html).replace(/\n/g, '\\n') +
+						this.domain + '"><div id="parser"' + (this.selectable ? '>' : ' style="user-select:none">') + this
+						._handleHtml(html).replace(/\n/g, '\\n') +
 						'</div><script>"use strict";function e(e){if(window.__dcloud_weex_postMessage||window.__dcloud_weex_){var t={data:[e]};window.__dcloud_weex_postMessage?window.__dcloud_weex_postMessage(t):window.__dcloud_weex_.postMessage(JSON.stringify(t))}}document.body.onclick=function(){e({action:"click"})},' +
 						(this.showWithAnimation ? 'document.body.style.animation="_show .5s",' : '') +
 						'setTimeout(function(){e({action:"load",text:document.body.innerText,height:document.getElementById("parser").scrollHeight})},50);\x3c/script>';
@@ -224,11 +225,15 @@
 				}
 				this.$refs.web.evalJs(
 					'var t=document.getElementsByTagName("title");t.length&&e({action:"getTitle",title:t[0].innerText});for(var o,n=document.getElementsByTagName("style"),r=1;o=n[r++];)o.innerHTML=o.innerHTML.replace(/body/g,"#parser");for(var a,c=document.getElementsByTagName("img"),s=[],i=0==c.length,d=0,l=0,g=0;a=c[l];l++)parseInt(a.style.width||a.getAttribute("width"))>' +
-					windowWidth + '&&(a.style.height="auto"),a.onload=function(){++d==c.length&&(i=!0)},a.onerror=function(){++d==c.length&&(i=!0),' + (cfg.errorImg ? 'this.src="' + cfg.errorImg + '",' : '') +
+					windowWidth +
+					'&&(a.style.height="auto"),a.onload=function(){++d==c.length&&(i=!0)},a.onerror=function(){++d==c.length&&(i=!0),' +
+					(cfg.errorImg ? 'this.src="' + cfg.errorImg + '",' : '') +
 					'e({action:"error",source:"img",target:this})},a.hasAttribute("ignore")||"A"==a.parentElement.nodeName||(a.i=g++,s.push(a.getAttribute("original-src")||a.src||a.getAttribute("data-src")),a.onclick=function(){e({action:"preview",img:{i:this.i,src:this.src}})});e({action:"getImgList",imgList:s});for(var u,m=document.getElementsByTagName("a"),f=0;u=m[f];f++)u.onclick=function(){var t,o=this.getAttribute("href");if("#"==o[0]){var n=document.getElementById(o.substr(1));n&&(t=n.offsetTop)}return e({action:"linkpress",href:o,offset:t}),!1};for(var h,y=document.getElementsByTagName("video"),v=0;h=y[v];v++)h.style.maxWidth="100%",h.onerror=function(){e({action:"error",source:"video",target:this})}' +
 					(this.autopause ? ',h.onplay=function(){for(var e,t=0;e=y[t];t++)e!=this&&e.pause()}' : '') +
 					';for(var _,p=document.getElementsByTagName("audio"),w=0;_=p[w];w++)_.onerror=function(){e({action:"error",source:"audio",target:this})};' +
-					(this.autoscroll ? 'for(var T,E=document.getElementsByTagName("table"),B=0;T=E[B];B++){var N=document.createElement("div");N.style.overflow="scroll",T.parentNode.replaceChild(N,T),N.appendChild(T)}' : '') +
+					(this.autoscroll ?
+						'for(var T,E=document.getElementsByTagName("table"),B=0;T=E[B];B++){var N=document.createElement("div");N.style.overflow="scroll",T.parentNode.replaceChild(N,T),N.appendChild(T)}' :
+						'') +
 					'var x=document.getElementById("parser");clearInterval(window.timer),window.timer=setInterval(function(){i&&clearInterval(window.timer),e({action:"ready",ready:i,height:x.scrollHeight})},350)'
 				)
 				this.nodes = [1];
@@ -457,12 +462,14 @@
 				// #endif
 				// #ifndef H5 || APP-PLUS-NVUE || MP-360
 				for (var i = 0, n; n = ns[i++];) {
-					if (n.type == 'text') txt += n.text.replace(/&nbsp;/g, '\u00A0').replace(/&lt;/g, '<').replace(/&gt;/g, '>')
+					if (n.type == 'text') txt += n.text.replace(/&nbsp;/g, '\u00A0').replace(/&lt;/g, '<').replace(/&gt;/g,
+							'>')
 						.replace(/&amp;/g, '&');
 					else if (n.type == 'br') txt += '\n';
 					else {
 						// 块级标签前后加换行
-						var block = n.name == 'p' || n.name == 'div' || n.name == 'tr' || n.name == 'li' || (n.name[0] == 'h' && n.name[1] >
+						var block = n.name == 'p' || n.name == 'div' || n.name == 'tr' || n.name == 'li' || (n.name[0] ==
+							'h' && n.name[1] >
 							'0' && n.name[1] < '7');
 						if (block && txt && txt[txt.length - 1] != '\n') txt += '\n';
 						if (n.children) txt += this.getText(n.children);
@@ -492,9 +499,12 @@
 				// #ifdef MP-WEIXIN || MP-QQ || MP-TOUTIAO
 				d = '>>>';
 				// #endif
-				var selector = uni.createSelectorQuery().in(this._in ? this._in.page : this).select((this._in ? this._in.selector :
-					'#_top') + (obj.id ? `${d}#${obj.id},${this._in?this._in.selector:'#_top'}${d}.${obj.id}` : '')).boundingClientRect();
-				if (this._in) selector.select(this._in.selector).scrollOffset().select(this._in.selector).boundingClientRect();
+				var selector = uni.createSelectorQuery().in(this._in ? this._in.page : this).select((this._in ? this._in
+					.selector :
+					'#_top') + (obj.id ? `${d}#${obj.id},${this._in?this._in.selector:'#_top'}${d}.${obj.id}` :
+					'')).boundingClientRect();
+				if (this._in) selector.select(this._in.selector).scrollOffset().select(this._in.selector)
+					.boundingClientRect();
 				else selector.selectViewport().scrollOffset();
 				selector.exec(res => {
 					if (!res[0]) return obj.fail && obj.fail('Label not found')

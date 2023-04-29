@@ -6,4 +6,7 @@ const connection = mysql.createConnection({
 	password: 'LXL1314520',
 	database: 'student_project'
 })
+const query = (str) => {
+	return connection.promise().query(str)
+}
 module.exports = connection

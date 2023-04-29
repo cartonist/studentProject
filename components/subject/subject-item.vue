@@ -15,7 +15,7 @@
 				<view class="result">结果:</view>
 			</view>
 			<view>
-				<!-- <MDParserHeightlight class="answer"></MDParserHeightlight> -->
+				<!-- <MDParserHeightlight class="answer" resource="### Hello World"></MDParserHeightlight> -->
 				<!-- <rich-text :nodes="item.result"></rich-text> -->
 				<view class="">
 					{{item.result}}
@@ -42,8 +42,9 @@
 		getCurrentInstance,
 		ref
 	} from "vue";
+	// import MDParserHeightlight from '@/components/common/cmder-MDParserHighlight/index.vue'
 	defineProps(['item'])
-	const nodes = `<pre><code class="language-js">var a = 5;</code></pre>`
+	// const nodes = `<pre><code class="language-js">var a = 5;</code></pre>`
 	// console.log(item)
 </script>
 
