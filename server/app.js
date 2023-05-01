@@ -29,7 +29,7 @@ app.use(cookieParser());
 app.use('/public', express.static('public'));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/wechat/user', usersRouter);
 // 班级路由
 app.use('/wechat/class', classRouter);
 // 优秀学员路由

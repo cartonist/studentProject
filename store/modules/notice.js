@@ -1,6 +1,6 @@
 export default {
 	state: {
-		noticeInfo: null
+		noticeInfo: uni.getStorageSync('noticeInfo')
 	},
 	getters: {
 
@@ -8,6 +8,7 @@ export default {
 	mutations: {
 		addNoticeInfo(state, option) {
 			state.noticeInfo = option
+			uni.setStorageSync('noticeInfo', option)
 		}
 	},
 	actions: {

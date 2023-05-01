@@ -1,6 +1,6 @@
 export default {
 	state: {
-		signInfo: null
+		signInfo: uni.getStorageSync('sigInfo') || {}
 	},
 	getters: {
 
@@ -8,6 +8,7 @@ export default {
 	mutations: {
 		addSignInfo(state, option) {
 			state.signInfo = option
+			uni.setStorageSync('signInfo', option)
 		}
 	},
 	actions: {
