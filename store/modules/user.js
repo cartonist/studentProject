@@ -20,6 +20,10 @@ export default {
 			state.studentInfo = option
 			uni.setStorageSync('studentInfo', option)
 		},
+		clearStudent(state) {
+			state.studentInfo = {}
+			uni.removeStorageSync('studentInfo')
+		},
 		changeUserInfo(state, option) {
 			state.userList = option
 			uni.setStorageSync('userList', option)
@@ -27,6 +31,14 @@ export default {
 		setToken(state, token) {
 			state.token = token
 			uni.setStorageSync('token', token)
+		},
+		clearToken(state) {
+			state.token = ""
+			uni.removeStorageSync('token')
+		},
+		clearUserInfo(state) {
+			state.userList = {}
+			uni.removeStorageSync('userList')
 		}
 	},
 	actions: {

@@ -9,3 +9,22 @@ export const getClassList = () => {
 		}
 	})
 }
+export const getEnterSchool = () => {
+	return $http.request({
+		url: '/wechat/class/enter-school',
+		method: 'GET',
+		header: {
+			token: uni.getStorageSync('token')
+		}
+	})
+}
+export const getInSchool = (options) => {
+	console.log(options)
+	return $http.request({
+		url: '/wechat/class/get-in',
+		method: 'POST',
+		data: {
+			...options
+		}
+	})
+}

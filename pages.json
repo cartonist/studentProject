@@ -91,6 +91,33 @@
 				"backgroundColor": "#f0f3f7",
 				"enablePullDownRefresh": false
 			}
+		},
+		{
+			"path": "pages/archives/archives",
+			"style": {
+				"navigationBarTitleText": "档案管理",
+				"navigationStyle": "custom",
+				"backgroundColor": "#f0f3f7",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/sign-contract/sign-contract",
+			"style": {
+				"navigationBarTitleText": "",
+				"navigationStyle": "custom",
+				"backgroundColor": "#f0f3f7",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/sign-canvas/sign-canvas",
+			"style": {
+				"navigationBarTitleText": "档案管理",
+				"navigationStyle": "custom",
+				"backgroundColor": "#f0f3f7",
+				"enablePullDownRefresh": false
+			}
 		}
 
 

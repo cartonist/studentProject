@@ -27,6 +27,10 @@
 				<image src="@/static/img/ser.png" mode=""></image>
 				<view class="item-card">客服即帮助</view>
 			</view>
+			<view class="card-item" @click="logout">
+				<image src="@/static/img/logout.png" mode=""></image>
+				<view class="item-card">退出登录</view>
+			</view>
 		</view>
 		<MyTabbar :currentIndex="currentIndex"></MyTabbar>
 	</view>
@@ -66,7 +70,8 @@
 		useStore
 	} from 'vuex';
 	import {
-		getClassList
+		getClassList,
+		getEnterSchool
 	} from '../../api/class';
 	import {
 		authLogin
@@ -82,11 +87,14 @@
 	} = getCurrentInstance();
 	const store = useStore()
 	let currentIndex = 4
+	// 判断是否登录
 	const isLogin = computed(() => store.state.user.studentInfo.isLogin)
 	const userList = computed(() => store.state.user.userList)
 	const params = {}
 	const avatar = computed(() => store.state.user.studentInfo.avatarUrl)
 	const nickName = computed(() => store.state.user.studentInfo.nickName)
+	// 判断是否入学
+	const token = computed(() => store.state.user.token)
 	const appId = "wxb7598c8f7daa146f"
 	const secret = "384ec922f905bff47cc281001c5257fa"
 	// 小程序用户的唯一标识
@@ -119,18 +127,24 @@
 	// 登录请求
 	const Login = async (option) => {
 		const res = await authLogin(option)
+		console.log(res)
 		// 有token，则说明是内部学员，因此可以请求有权限的接口
 		if (res.token) {
 			// 保存token
 			const token = res.token
 			store.commit('setToken', token)
-			// 获取学生信息
-			const stuInfo = await stuInfo()
-			store.dispatch('changeUserInfoAction', stuInfo)
-
-			// 获取学生协议
-			const stuCurrent = await stuCurrent()
-			store.dispatch('addSignInfoActions', stuCurrent)
+			// 保存用户基本信息
+			stuInfo().then(async (studentInfo) => {
+				store.dispatch('changeUserInfoAction', studentInfo)
+				const classInfo = await getEnterSchool()
+				// 保存用户的班型信息
+				store.dispatch('addClassInfoActions', classInfo)
+				// 如果status是1表示该学员已经签署了协议
+				if (studentInfo.status == 1) {
+					const protocal = await stuCurrent()
+					store.dispatch('addSignInfoActions', protocal)
+				}
+			})
 		}
 		// 没有token,不是内部学员
 		store.dispatch('changeStudentAction', res)
@@ -157,7 +171,7 @@
 		// })
 	}
 	const goCard = () => {
-		if (userList.value == {}) {
+		if (token.value) {
 			uni.navigateTo({
 				url: ''
 			})
@@ -178,6 +192,16 @@
 		uni.navigateTo({
 			url: '/pages/consult/consult'
 		})
+	}
+	const logout = () => {
+		// 清空本地的studentInfo和token，同时要手动更改studentInfo的值，才能触发computed
+		// 因为studentInfo的赋值只在store初始化的进行，所以仅更改本地无法store中的数据不会更新）
+		store.commit('clearStudent')
+		store.commit('clearToken')
+		store.commit('clearUserInfo')
+		store.commit('clearSignInfo')
+		store.commit('clearClassInfo')
+
 	}
 </script>
 

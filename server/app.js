@@ -12,6 +12,7 @@ var noticeRouter = require('./routes/notice')
 var consultRouter = require('./routes/consult')
 var questionRouter = require('./routes/questions')
 var processRouter = require('./routes/process')
+var protocolRouter = require('./routes/protocol')
 
 var app = express();
 
@@ -42,6 +43,8 @@ app.use('/wechat/help', consultRouter)
 app.use('/wechat/questions', questionRouter)
 // 面试流程路由
 app.use('/wechat/process', processRouter)
+// 协议路由
+app.use('/wechat/protocol', protocolRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

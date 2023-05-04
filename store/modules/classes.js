@@ -1,6 +1,6 @@
 export default {
 	state: {
-		classInfo: uni.getStorageSync('classInfo') || {}
+		classInfo: uni.getStorageSync('classInfo') || []
 	},
 	getters: {
 
@@ -9,6 +9,10 @@ export default {
 		addClassInfo(state, option) {
 			state.classInfo = option
 			uni.setStorageSync('classInfo', option)
+		},
+		clearClassInfo(state) {
+			state.classInfo = []
+			uni.removeStorageSync('classInfo')
 		}
 	},
 	actions: {

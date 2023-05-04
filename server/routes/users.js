@@ -1,15 +1,29 @@
 var express = require('express');
 const connection = require('../db/connection');
 var router = express.Router();
+// 引入token包
+let jwt = require('jsonwebtoken')
 
 /* GET users listing. */
+// 查询学员的基本信息
+router.get('/student/info', function(req, res, next) {
+	const token = req.headers.token
+	let tokenObj = jwt.decode(token)
+	const openId = tokenObj.openId
+	connection.query(`select * from student where open_id="${openId}"`, function(err, results) {
+		res.send({
+			resultCode: 200,
+			data: results[0]
+		})
+	})
+});
+// 查询该用户是否入学
 router.post('/auth/login', function(req, res, next) {
 	const body = req.body
 	const openId = body.openId
-
-	connection.query(`select * from student where open_id=${openId}`, function(err, results) {
+	connection.query(`select * from student where open_id ="${openId}"`, function(err, results) {
 		// 该小程序用户不是学员，则没有token
-		if (!results) {
+		if (results.length == 0) {
 			res.send({
 				resultCode: 200,
 				data: {
@@ -32,8 +46,9 @@ router.post('/auth/login', function(req, res, next) {
 			res.send({
 				resultCode: 200,
 				data: {
-					...results[0],
+					...body,
 					token,
+					nickName: '学员用户',
 					isLogin: true
 				}
 			})
@@ -41,5 +56,4 @@ router.post('/auth/login', function(req, res, next) {
 	})
 
 });
-
 module.exports = router;

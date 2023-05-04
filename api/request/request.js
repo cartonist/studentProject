@@ -1,8 +1,9 @@
 export default {
 	common: {
 		// baseUrl: 'http://localhost:3000',
-		baseUrl: 'http://192.168.0.107:3000',
+		baseUrl: 'http://localhost:3000',
 		data: {},
+		// 这里是header,后端获取是req.headers
 		header: {
 			"Content-type": "application/json",
 			"Content-type": "application/x-www-form-urlencoded"

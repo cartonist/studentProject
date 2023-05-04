@@ -5,13 +5,13 @@
 			<view>
 				<!-- banner -->
 				<view class="banner-bg">
-					<view class="sign-btn" @click="goEnterSchool">
+					<view class="sign-btn" @click="goEnterSchool(class_id)">
 						立即填写 >
 					</view>
 				</view>
 				<!-- 按钮 -->
 				<view class="school-content">
-					<MangaList></MangaList>
+					<MangaList :id="class_id"></MangaList>
 				</view>
 				<!-- 名人堂 -->
 				<view class="famous">
@@ -35,7 +35,7 @@
 					<view class="close" @click="closePop">
 						<image src="/static/img/delete.png" mode=""></image>
 					</view>
-					<view class="btn" @click="goEnterSchool">快速入学</view>
+					<view class="btn" @click="goEnterSchool(class_id)">快速入学</view>
 				</view>
 			</view>
 		</view>
@@ -66,6 +66,7 @@
 	} = getCurrentInstance();
 	const scrollHeight = ref("")
 	const title = ref("")
+	const class_id = ref(0)
 	const isPop = ref(true)
 	const closePop = () => {
 		isPop.value = false
@@ -78,6 +79,7 @@
 		// console.log(JSON.parse(option.item))
 		const item = JSON.parse(option.item)
 		title.value = item.class_name
+		class_id.value = item.id
 		__init()
 		// 获取屏幕的高度
 		uni.getSystemInfo({
@@ -102,9 +104,9 @@
 		const noticeData = await getNoticeList()
 		noticeList.value = noticeData
 	}
-	const goEnterSchool = () => {
+	const goEnterSchool = (id) => {
 		uni.navigateTo({
-			url: "/pages/enter-school/enter-school"
+			url: "/pages/enter-school/enter-school?id=" + id
 		})
 	}
 </script>

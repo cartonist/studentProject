@@ -1,6 +1,6 @@
 export default {
 	state: {
-		signInfo: uni.getStorageSync('sigInfo') || {}
+		signInfo: uni.getStorageSync('signInfo') || {}
 	},
 	getters: {
 
@@ -9,6 +9,10 @@ export default {
 		addSignInfo(state, option) {
 			state.signInfo = option
 			uni.setStorageSync('signInfo', option)
+		},
+		clearSignInfo(state) {
+			state.signInfo = {}
+			uni.removeStorageSync('signInfo')
 		}
 	},
 	actions: {
